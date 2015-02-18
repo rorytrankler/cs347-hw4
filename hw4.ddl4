@@ -1,0 +1,100 @@
+drop view SIM_project_employee ;
+drop view SIM_manager ;
+
+create view SIM_project_employee as
+SELECT * FROM SIM_person
+WHERE TYPE = 'ProjectEmp' ;
+
+create or replace TRIGGER SIM_project_employee_trigger
+     INSTEAD OF insert ON SIM_person
+     FOR EACH ROW
+BEGIN
+     insert into SIM_person(
+        PERSON_ID,
+        TYPE,
+        NAME,
+        SSNUM,
+		gender,
+		birth_date,
+		address,
+		city,
+		state,
+		zip,
+		emp_id,
+		hire_date,
+		salary,
+		title,
+		rating,
+		bonus,
+		dept_id,
+		dept_id1)
+     VALUES (
+        :new.PERSON_ID,
+        'ProjectEmp',
+        :new.NAME,
+        :new.SSNUM,
+		:new.gender,
+		:new.birth_date,
+		:new.address,
+		:new.city,
+		:new.state,
+		:new.zip,
+		:new.emp_id,
+		:new.hire_date,
+		:new.salary,
+		:new.title,
+		:new.rating,
+		:new.bonus,
+		:new.dept_id,
+		:new.dept_id1) ;
+END;
+/
+
+create view SIM_manager as
+SELECT * FROM SIM_person
+WHERE TYPE = 'Manager' ;
+
+create or replace TRIGGER SIM_manager_trigger
+     INSTEAD OF insert ON SIM_person
+     FOR EACH ROW
+BEGIN
+     insert into SIM_person(
+        PERSON_ID,
+        TYPE,
+        NAME,
+        SSNUM,
+		gender,
+		birth_date,
+		address,
+		city,
+		state,
+		zip,
+		emp_id,
+		hire_date,
+		salary,
+		title,
+		rating,
+		bonus,
+		dept_id,
+		dept_id1)
+     VALUES (
+        :new.PERSON_ID,
+        'Manager',
+        :new.NAME,
+        :new.SSNUM,
+		:new.gender,
+		:new.birth_date,
+		:new.address,
+		:new.city,
+		:new.state,
+		:new.zip,
+		:new.emp_id,
+		:new.hire_date,
+		:new.salary,
+		:new.title,
+		:new.rating,
+		:new.bonus,
+		:new.dept_id,
+		:new.dept_id1) ;
+END;
+/
